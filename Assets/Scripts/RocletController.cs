@@ -13,14 +13,18 @@ namespace GildarGaming.LD45
         public GameObject upper;
         public GameObject holder;
         bool allPartsActive = false;
-
+        [SerializeField] GameObject[] thrusters;
         void Start()
         {
-            holder.SetActive(false);
-            mainBody.SetActive(false);
-            upper.SetActive(false);
-            leftEngine.SetActive(false);
-            rightEngine.SetActive(false);
+            //holder.SetActive(false);
+            //mainBody.SetActive(false);
+            //upper.SetActive(false);
+            //leftEngine.SetActive(false);
+            //rightEngine.SetActive(false);
+            foreach (var thruster in thrusters)
+            {
+                thruster.SetActive(false);
+            }
             
         }
         void AddPart(BuildingPart part)
@@ -82,12 +86,21 @@ namespace GildarGaming.LD45
             Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
             rb.isKinematic = true;
             player.transform.position = holder.transform.position;
-
+            Destroy(rb);
+            player.transform.parent = this.transform;
+            player.transform.localPosition = new Vector3(0, 2.55f, 0f);
         }
 
         private void InitializeFlightSequence()
         {
-            throw new NotImplementedException();
+            foreach (var thruster in thrusters)
+            {
+                thruster.SetActive(true);
+                GetComponent<RocketFlyer>().enabled = true;
+                
+                
+
+            }
         }
     }
 }
