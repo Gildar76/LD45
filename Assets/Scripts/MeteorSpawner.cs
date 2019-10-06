@@ -7,7 +7,7 @@ namespace GildarGaming.LD45
 {
     public class MeteorSpawner : MonoBehaviour
     {
-
+        public static int spawnCount = 0;
         [SerializeField] GameObject meteorPrefab;
         float spawnTimer = 0f;
         [SerializeField] float spawnDelay = 3f;
@@ -24,6 +24,8 @@ namespace GildarGaming.LD45
 
         void Spawn()
         {
+            if (spawnCount > 30) return;
+            spawnCount++;
             SetVelocityAndLocation();
             Instantiate(meteorPrefab, spawnLocation, Quaternion.identity);
             spawnTimer = 0;
@@ -32,7 +34,7 @@ namespace GildarGaming.LD45
         void SetVelocityAndLocation()
         {
             spawnVelocity = new Vector3(Random.Range(-50f, 50f), Random.Range(0f, -1f), 0f);
-            spawnLocation = new Vector3(Random.Range(minSpawnX, maxSpawnX), spawnY, 0f);
+            spawnLocation = new Vector3(Random.Range(minSpawnX, maxSpawnX), spawnY, -5f);
 
         }
         // Update is called once per frame
