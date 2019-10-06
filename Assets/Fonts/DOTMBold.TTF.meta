@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 7a01375414892d84fa760516b0c6f2a2
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Dot Matrix
+  fontNames:
+  - Dot Matrix
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1498c51c10632664a8649c16e9bde64b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

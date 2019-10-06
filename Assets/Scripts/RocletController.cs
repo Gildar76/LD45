@@ -1,6 +1,8 @@
-﻿using System;
+﻿using GildarGaming.Ld45;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 namespace GildarGaming.LD45
 {
@@ -105,6 +107,10 @@ namespace GildarGaming.LD45
             GetComponent<RocketFlyer>().enabled = true;
             CanvasGroup gr = FindObjectOfType<CanvasGroup>();
             StartCoroutine(FadeScreen(gr));
+            TextMeshProUGUI gameoverText = FindObjectOfType<TextMeshProUGUI>();
+            gameoverText.text = "YOU HAVE ESCAPED THE METEOR STORM!";
+            gameoverText.color = Color.green;
+            GameManager.playerIsDead = true;
         }
 
         private IEnumerator FadeScreen(CanvasGroup group)

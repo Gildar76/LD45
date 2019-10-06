@@ -1,6 +1,8 @@
-﻿using System;
+﻿using GildarGaming.Ld45;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 namespace GildarGaming.LD45
 {
@@ -21,8 +23,24 @@ namespace GildarGaming.LD45
             playerAudio = GetComponent<AudioSource>();
         }
 
+        void OnEnable()
+        {
+            GameManager.playerIsDead = false;
+        }
+
         void Update()
         {
+            Vector3 pos = transform.position;
+            if (pos.x > 475 || pos.x < -250f)
+            {
+                pos.x = Mathf.Clamp(pos.x, -250f, 475f);
+                transform.position = pos;
+            }
+            if (pos.y > 50)
+            {
+                pos.y = 50f;
+                transform.position = pos;
+            }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 ActivateTractorBeam();
@@ -90,7 +108,14 @@ namespace GildarGaming.LD45
             Destroy(this.gameObject,2f);
             playerAudio.Stop();
             playerAudio.PlayOneShot(deathSound);
+            CanvasGroup gr = FindObjectOfType<CanvasGroup>();
+            StartCoroutine(FadeScreen(gr));
+            TextMeshProUGUI gameoverText = FindObjectOfType<TextMeshProUGUI>();
+            gameoverText.text = "YOU HAVE DIED! PRESS SPACE TO RESTART";
+            gameoverText.color = Color.red;
+            GameManager.playerIsDead = true;
             this.enabled = false;
+
 
         }
 
@@ -119,6 +144,15 @@ namespace GildarGaming.LD45
                 }
             }
             return closest;
+        }
+
+        private IEnumerator FadeScreen(CanvasGroup group)
+        {
+            while (group.alpha < 1)
+            {
+                yield return group.alpha += Time.deltaTime / 5f; ;
+            }
+
         }
     }
 
