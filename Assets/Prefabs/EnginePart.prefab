@@ -77,6 +77,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 970313903307624091, guid: a60770866a8b6b242886995fcc539dc3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3475814721756023415, guid: a60770866a8b6b242886995fcc539dc3,
         type: 3}
       propertyPath: m_CastShadows

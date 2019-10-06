@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RocketFlyer : MonoBehaviour
 {
+    public AudioSource rocketAudio;
+    public AudioClip thrustSound;
+
     Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -14,11 +17,12 @@ public class RocketFlyer : MonoBehaviour
 
     void OnEnable()
     {
+        rocketAudio.PlayOneShot(thrustSound);
         rb = gameObject.AddComponent<Rigidbody2D>();
     }
 
      void FixedUpdate()
     {
-        rb.AddForce(Vector3.up * 10f);
+        rb.AddForce(Vector3.up * 15f);
     }
 }

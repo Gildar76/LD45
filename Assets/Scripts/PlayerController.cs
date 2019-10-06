@@ -6,6 +6,9 @@ namespace GildarGaming.LD45
 {
     public class PlayerController : MonoBehaviour
     {
+        public AudioClip beamSound;
+        public AudioClip deathSound;
+        public AudioSource playerAudio;
         Rigidbody2D rb;
         [SerializeField] float speed;
         bool isAlive = true;
@@ -15,6 +18,7 @@ namespace GildarGaming.LD45
         {
             rb = GetComponent<Rigidbody2D>();
             lr = GetComponent<LineRenderer>();
+            playerAudio = GetComponent<AudioSource>();
         }
 
         void Update()
@@ -59,9 +63,10 @@ namespace GildarGaming.LD45
         void ActivateTractorBeam()
         {
 
-            lr.enabled = true;
             target = FindClosestGameObject(transform.position, GameObject.FindGameObjectsWithTag("BuildingParth"));
-            
+            if (target == null) return;
+            playerAudio.PlayOneShot(beamSound);
+            lr.enabled = true;
 
         }
     
@@ -82,7 +87,10 @@ namespace GildarGaming.LD45
         void Death()
         {
             isAlive = false;
-            Destroy(this.gameObject);
+            Destroy(this.gameObject,2f);
+            playerAudio.Stop();
+            playerAudio.PlayOneShot(deathSound);
+            this.enabled = false;
 
         }
 
@@ -97,6 +105,7 @@ namespace GildarGaming.LD45
 
         public static GameObject FindClosestGameObject(Vector3 currentPosition, GameObject[] objectArray, float maxDistance = float.MaxValue)
         {
+            maxDistance = 50f;
             float closestDistance = float.MaxValue;
             GameObject closest = null;
             for (int i = 0; i < objectArray.Length; i++)

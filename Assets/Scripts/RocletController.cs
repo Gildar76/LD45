@@ -16,11 +16,11 @@ namespace GildarGaming.LD45
         [SerializeField] GameObject[] thrusters;
         void Start()
         {
-            //holder.SetActive(false);
-            //mainBody.SetActive(false);
-            //upper.SetActive(false);
-            //leftEngine.SetActive(false);
-            //rightEngine.SetActive(false);
+            holder.SetActive(false);
+            mainBody.SetActive(false);
+            upper.SetActive(false);
+            leftEngine.SetActive(false);
+            rightEngine.SetActive(false);
             foreach (var thruster in thrusters)
             {
                 thruster.SetActive(false);
@@ -37,6 +37,7 @@ namespace GildarGaming.LD45
                     break;
                 case BuildingPart.Upper:
                     upper.SetActive(true);
+                    holder.SetActive(true);
                     break;
                 case BuildingPart.LeftEngine:
                     leftEngine.SetActive(true);
@@ -96,11 +97,23 @@ namespace GildarGaming.LD45
             foreach (var thruster in thrusters)
             {
                 thruster.SetActive(true);
-                GetComponent<RocketFlyer>().enabled = true;
-                
+
+
                 
 
             }
+            GetComponent<RocketFlyer>().enabled = true;
+            CanvasGroup gr = FindObjectOfType<CanvasGroup>();
+            StartCoroutine(FadeScreen(gr));
+        }
+
+        private IEnumerator FadeScreen(CanvasGroup group)
+        {
+            while (group.alpha < 1)
+            {
+                yield return group.alpha += Time.deltaTime / 5f; ;
+            }
+            
         }
     }
 }

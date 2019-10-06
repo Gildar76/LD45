@@ -24,7 +24,7 @@ namespace GildarGaming.LD45
 
         void Spawn()
         {
-            if (spawnCount > 30) return;
+            if (spawnCount > 300) return;
             spawnCount++;
             SetVelocityAndLocation();
             Instantiate(meteorPrefab, spawnLocation, Quaternion.identity);

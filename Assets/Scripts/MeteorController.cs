@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace GildarGaming.LD45
 {
+    
     public class MeteorController : MonoBehaviour
     {
+        public AudioSource meteorAudio;
+        public AudioClip hitSOund;
         ParticleSystem ps;
         ParticleSystem.EmissionModule psEmission;
         float maxVelocity = -10f;
@@ -17,6 +20,8 @@ namespace GildarGaming.LD45
         // Start is called before the first frame update
         void Start()
         {
+            meteorAudio = GetComponent<AudioSource>();
+
 
             rb = GetComponent<Rigidbody2D>();
             ps = GetComponent<ParticleSystem>();
@@ -60,6 +65,7 @@ namespace GildarGaming.LD45
         {
             Debug.Log("Colliding");
             hasCollided = true;
+            meteorAudio.PlayOneShot(hitSOund);
         }
     }
 
